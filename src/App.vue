@@ -16,8 +16,8 @@
         </div>
 
         <div class="cont" v-else>
-            <div class="title-bar" style="-webkit-app-region: drag;">
-                <div class="title-bar-text">The TechCombobulator 2006 Professional</div>
+            <div class="title-bar">
+                <div class="title-bar-text" style="-webkit-app-region: drag;">The TechCombobulator 2006 Professional</div>
                 <div class="title-bar-controls">
                     <button aria-label="Minimize"></button>
                     <button aria-label="Restore"></button>
@@ -46,12 +46,14 @@
                     </article>
 
                     <article v-if="activeTab === 'debug'" role="tabpanel" id="tab-B">
-                        <div class="button_container">
+                        <!-- <div class="button_container"> -->
+                        <section class="field-row" style="justify-content: flex-end">
                             <button @click="clip?.play('Wave'); clip?.speak('This does not work :c')">Quit</button>
                             <button @click=" clip?.play('Congratulate')">Initialize Jingles</button>
                             <button @click="clip?.play('Thinking')" class="default">Load all</button>
                             <StartBtn @click=" clip?.play('Wave'); clip?.speak('This does not work :c')">Start</StartBtn>
-                        </div>
+                        </section>
+                        <!-- </div> -->
                     </article>
 
                     <article role="tabpanel" hidden id="tab-C">
@@ -159,6 +161,13 @@ onErrorCaptured((err: any) => {
 </script>
 
 <style lang="scss" scoped>
+.title-bar-text {
+    width: -webkit-fill-available;
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+
 .cont {
     display: flex;
     flex-direction: column;
