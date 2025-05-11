@@ -2,6 +2,7 @@ import Agent from './agent'
 import { agents } from './agents';
 import { AgentWrapper, LoadOptions } from './types';
 import clippy from './agents/Clippy/index'
+import rover from './agents/Rover/index'
 
 export const load = (options: LoadOptions) => {
     const {
@@ -13,7 +14,7 @@ export const load = (options: LoadOptions) => {
 
 
     const a = new Agent({
-        agent: clippy,
+        agent: rover,
         selector
     });
     successCb(a)
