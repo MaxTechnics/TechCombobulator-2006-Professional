@@ -27,6 +27,7 @@
 
             <div class="window-body windowcontent">
                 <p>This shit is like so ass<br />Elk zunnen dah<br />ik ben herrit callewaert uit bavikhove deelhemeente van oarelbeke.</p>
+                <img style="position: absolute; top: 30px; right: 5px; height: 75px;" :src="spin" />
 
                 <section class="tabs">
                     <menu role="tablist" aria-label="Sample Tabs">
@@ -88,6 +89,7 @@ import StartBtn from './components/StartBtn.vue'
 import { createClient } from '@supabase/supabase-js';
 import RealtimeLatency from './components/RealtimeLatency.vue';
 import { jingleActions } from './actions/audio';
+import spin from './images/undertale-dog.gif';
 
 const hasLoaded = ref(false);
 const activeTab = ref<'actions' | 'oldjingles' | 'debug' | 'clippy'>('debug');
@@ -141,7 +143,7 @@ onMounted(() => {
             console.log(agent.animations())
             // agent.show(false);
             agent.play('Greeting')
-            agent.speak("It looks like you're debugging this shit. Would you like help?", false);
+            agent.speak("Debugger? I hardly know her!", false);
             agent.play('Congratulate', 10000);
             // agent.animate();
         },
