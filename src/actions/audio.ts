@@ -1,4 +1,9 @@
-export const jingleActions: { [group: string]: { [action_id: string]: JukeBoxAction } } = {
+interface CombobulatorAction {
+    name: string;
+    id: string;
+}
+
+export const jingleActions: { [group: string]: { [action_id: string]: CombobulatorAction } } = {
     'Journaal 2013 J13': {
         // goto sport J_OVER_NAAR_SPORT
         // back to news J_IDENT_LOGO
@@ -195,6 +200,49 @@ export const jingleActions: { [group: string]: { [action_id: string]: JukeBoxAct
         }
     },
     'De Zevende Dag 2024': {
-
+        'd7_2024_hl': {
+            name: 'Headlines',
+            id: 'd7_2024_hl'
+        },
+        'd7_2024_topic': {
+            name: 'Topic Separator',
+            id: 'd7_2024_topic'
+        },
+        'd7_2024_intro': {
+            name: 'Begingeneriek',
+            id: 'd7_2024_intro'
+        },
+        'd7_2024_bumper_menu': {
+            name: 'Bumper Menu',
+            id: 'd7_2024_bumper_menu'
+        },
+        'd7_2024_bumper_music': {
+            name: 'Bumper Muziek',
+            id: 'd7_2024_bumper_music'
+        },
+        'd7_2024_bumper_studio': {
+            name: 'Bumper Studio',
+            id: 'd7_2024_bumper_studio'
+        },
+        'd7_2024_bumper_titel': {
+            name: 'Bumper Titel',
+            id: 'd7_2024_bumper_titel'
+        },
+        'd7_2024_accent_1': {
+            name: 'Accent 1',
+            id: 'd7_2024_accent_1'
+        },
+        'd7_2024_accent_2': {
+            name: 'Accent 2',
+            id: 'd7_2024_accent_2'
+        },
+        'd7_2024_bedanking': {
+            name: 'Bedanking',
+            id: 'd7_2024_bedanking'
+        },
+        'd7_2024_outro': {
+            name: 'Eindgeneriek',
+            id: 'd7_2024_outro'
+        }
     }
 };
