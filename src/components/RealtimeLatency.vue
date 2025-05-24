@@ -13,7 +13,7 @@ const props = defineProps<{
 }>();
 
 // Ping channel is used to calculate roundtrip time from client to server to client
-const pingChannel: RealtimeChannel = props.supa_client.channel(`ping:itlookslikeyouretryingtoplayajingle`, {
+const pingChannel: RealtimeChannel = props.supa_client.channel(`ping:techcombobulator2006professional`, {
     config: { broadcast: { ack: true } },
 });
 
@@ -40,7 +40,7 @@ onBeforeMount(() => {
                     const newLatency = end - start;
 
                     if (newLatency >= LATENCY_THRESHOLD) {
-                        console.warn(`Roundtrip Latency for it looks like you're trying to play a jingle surpassed ${LATENCY_THRESHOLD} ms at ${newLatency.toFixed(1)} ms`);
+                        console.warn(`Roundtrip Latency for TechCombobulator surpassed ${LATENCY_THRESHOLD} ms at ${newLatency.toFixed(1)} ms`);
                     }
 
                     latency.value = newLatency;
