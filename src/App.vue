@@ -66,6 +66,7 @@
                             </fieldset>
 
                             <VotePanel :realtimeChannel="bsChannel" />
+                            <div role="tooltip">A balloon is better known as tooltip in web development.</div>
                         </div>
                     </article>
 
@@ -81,7 +82,7 @@
 
                     <article v-if="activeTab === 'debug'" role="tabpanel" id="tab-B">
                         <section class="field-row" style="justify-content: flex-end">
-                            <button @click="clip?.play('Wave'); clip?.speak('This does not work :c')">Quit</button>
+                            <button @click="clip?.play('Wave'); dothing()">Quit</button>
                             <button @click="executeRundownActions(bsChannel, 'do_terzake')">Walk rundownactions</button>
                             <button @click="clip?.play('Thinking')" class="default">Load all</button>
                             <StartBtn @click=" clip?.play('Wave'); clip?.speak('This does not work :c')">Start</StartBtn>
@@ -152,8 +153,14 @@ const time = ref('HUUH???');
 
 const clip = ref<Agent | undefined>();
 
+const dothing = () => {
+    clip?.value.moveTo(window.innerWidth - 170, 30, 0);
+}
+
 onMounted(() => {
     setInterval(updateClock, 100);
+
+    console.log(window.innerWidth)
 
     clippy.load({
         name: 'Clippy',
@@ -163,15 +170,18 @@ onMounted(() => {
             agent.moveTo(40, 40, 0)
             console.log(agent.animations())
             // agent.show(false);
+
             agent.play('Greeting')
             agent.speak("Debugger? I hardly know her!", false);
-            agent.play('Congratulate', 10000);
+            // agent.play('Congratulate', 10000);
             // agent.animate();
         },
         failCb: (e) => {
             console.error(e)
         }
     })
+    clip.value.moveTo(100, 130, 0)
+    dothing()
 });
 
 
