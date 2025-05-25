@@ -43,6 +43,21 @@ const props = defineProps<{
     realtimeChannel: RealtimeChannel
 }>();
 
+const computedVoteBracket = computed(() => {
+    // last year's logic: const winningVote = Object.entries(state.voteCount).reduce((a, b) => a[1] > b[1] ? a : b)[0];
+    if (!active_vote.value) return [];
+
+    return active_vote.value.choice
+        .map(choice => {
+            const tallyData = vote_tally.value[choice.id] || { tally: 0 };
+            return {
+                ...choice,
+                tally: tallyData.tally
+            };
+        })
+        .sort((a, b) => b.tally - a.tally);
+})
+
 const handleVoteStart = async (act: VoteMessage) => {
     await sendVoteAction(props.realtimeChannel, act);
 
