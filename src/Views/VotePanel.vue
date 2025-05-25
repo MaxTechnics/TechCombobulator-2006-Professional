@@ -2,7 +2,8 @@
     <fieldset>
         <legend>Vote</legend>
         <button v-for="act in voteActions" :key="act.id" @click="handleVoteStart(act)">{{ act.id }}</button>
-        <button @click="handleVoteEnd">Send vote end</button>
+        <button @click="handleVoteEnd()">Finish Vote</button>
+        <button @click="handleVoteEnd(true)">Cancel Vote</button>
 
     </fieldset>
     <ul class="tree-view">
@@ -78,16 +79,12 @@ const handleVoteStart = async (act: VoteMessage) => {
     });
 }
 
-const handleVoteEnd = () => {
+const handleVoteEnd = (cancel?: boolean) => {
     voting_active.value = false;
     sendVoteEnd(props.realtimeChannel);
 
-    if (computedVoteBracket.value[0].action && computedVoteBracket.value[0].tally !== 0) executeRundownActions(props.realtimeChannel, computedVoteBracket.value[0].action);
+    if (computedVoteBracket.value[0].action && computedVoteBracket.value[0].tally !== 0 && !cancel) executeRundownActions(props.realtimeChannel, computedVoteBracket.value[0].action);
 }
-
-// props.realtimeChannel.on('broadcast', { event: 'vote_trigger' }, async ({ payload }: { payload: { action_id: VoteMessage } }) => {
-// console.log('VotePanel vote trigger heard', payload)
-// });
 
 props.realtimeChannel.on('broadcast', { event: 'vote_submission' }, async ({ payload }: { payload: { choice_id: string } }) => {
     console.log('Vote submission', payload);
