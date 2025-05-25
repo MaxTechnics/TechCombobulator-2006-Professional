@@ -1,15 +1,15 @@
 <template>
-    <div class="bsod">
-        <div class="bsod-center">
-            <div class="title"><span>JUKEBOX</span></div>
-            <p>A fatal exception 0E has occured at 0028:C0014FCA. Jukebox will be terminated.</p>
-            <p>* Error:
-                <slot />
-            </p>
-            <p>* Press CTRL+ALT+DEL again to restart your computer. You will<br /><span>lose any unsaved information in all applications.</span></p>
-            <div class="action">Press any key to do nothing<span><u>&nbsp;</u></span></div>
-        </div>
-    </div>
+	<div class="bsod">
+		<div class="bsod-center">
+			<div class="title"><span>COMBOBULATOR</span></div>
+			<p>A fatal exception 0E has occured at 0028:C0014FCA. TechCombobulator will be terminated.</p>
+			<p>* Error:
+				<slot />
+			</p>
+			<p>* Press CTRL+ALT+DEL again to restart your computer. You will<br /><span>lose any unsaved information in all applications.</span></p>
+			<div class="action">Press any key to do nothing<span><u>&nbsp;</u></span></div>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts">
