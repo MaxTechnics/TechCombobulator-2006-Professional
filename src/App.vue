@@ -99,7 +99,6 @@
                 <p class="status-bar-field">
                     <RealtimeLatency :supa_client="supabase" />
                 </p>
-                <p class="status-bar-field">Last message: N/A</p>
                 <p class="status-bar-field">{{ time }}</p>
             </div>
         </div>
