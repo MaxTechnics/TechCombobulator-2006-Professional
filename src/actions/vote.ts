@@ -22,8 +22,7 @@ export const voteActions: { [action_id: string]: VoteMessage } = {
             {
                 name: 'Choice 1',
                 icon: 'Check',
-                id: 'choice_1',
-                action: ''
+                id: 'choice_1'
             },
             {
                 name: 'Choice 2',
@@ -51,12 +50,14 @@ export const voteActions: { [action_id: string]: VoteMessage } = {
             {
                 name: 'De afspraak',
                 icon: 'CalendarCheck',
-                id: 'pg_chooser_de_afspraak'
+                id: 'pg_chooser_de_afspraak',
+                action: 'do_daf'
             },
             {
                 name: 'De zevende dag',
                 icon: 'Donut',
-                id: 'pg_chooser_de_zevende_dag'
+                id: 'pg_chooser_de_zevende_dag',
+                action: 'do_d7d'
             },
             {
                 name: 'Journaal',
@@ -66,5 +67,11 @@ export const voteActions: { [action_id: string]: VoteMessage } = {
             }
         ],
         votes: 2
+    },
+    'brb': {
+        id: 'brb',
+        title: 'I\'ll be right back\nenjoy the blobs',
+        choice: [],
+        votes: -1
     }
 }
