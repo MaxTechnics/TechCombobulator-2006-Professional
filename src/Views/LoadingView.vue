@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import { starter } from '../player';
 import pcok from '../images/pcthumbsup.gif';
+import { onMounted } from 'vue';
 
 
 const doLoad = () => {
@@ -15,6 +16,9 @@ const doLoad = () => {
     emit('load');
 }
 
+onMounted(() => {
+    doLoad();
+})
 
 const emit = defineEmits(['load']);
 </script>
