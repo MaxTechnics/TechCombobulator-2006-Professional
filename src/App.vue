@@ -82,7 +82,7 @@
                     <article v-if="activeTab === 'debug'" role="tabpanel" id="tab-B">
                         <section class="field-row" style="justify-content: flex-end">
                             <button @click="clip?.play('Wave'); clip?.speak('This does not work :c')">Quit</button>
-                            <button @click=" clip?.play('Congratulate')">Initialize Jingles</button>
+                            <button @click="executeRundownActions(bsChannel, 'do_terzake')">Walk rundownactions</button>
                             <button @click="clip?.play('Thinking')" class="default">Load all</button>
                             <StartBtn @click=" clip?.play('Wave'); clip?.speak('This does not work :c')">Start</StartBtn>
                         </section>
@@ -110,6 +110,7 @@
 import { onMounted, reactive, ref, onErrorCaptured } from 'vue';
 import clippy, { Agent } from './clippy/index';
 import LoadingView from './Views/LoadingView.vue';
+import { executeRundownActions } from './lib/rundownmgr';
 import Error from './Views/Error.vue';
 import StartBtn from './components/StartBtn.vue'
 // import clippymap from './clippy/agents/Clippy/map.png';
