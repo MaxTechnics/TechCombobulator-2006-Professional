@@ -4,6 +4,7 @@ export type VoteChoice = {
     name: string;
     icon: keyof typeof lucideicon;
     id: string;
+    action?: string; // action to execute i guess. 
 }
 
 export interface VoteMessage {
@@ -21,7 +22,8 @@ export const voteActions: { [action_id: string]: VoteMessage } = {
             {
                 name: 'Choice 1',
                 icon: 'Check',
-                id: 'choice_1'
+                id: 'choice_1',
+                action: ''
             },
             {
                 name: 'Choice 2',
@@ -35,5 +37,34 @@ export const voteActions: { [action_id: string]: VoteMessage } = {
             }
         ],
         votes: -1
+    },
+    'program_chooser': {
+        id: 'program_chooser',
+        title: 'Choose program',
+        choice: [
+            {
+                name: 'Ter zake',
+                icon: 'Type',
+                id: 'pg_chooser_ter_zake',
+                action: 'do_terzake'
+            },
+            {
+                name: 'De afspraak',
+                icon: 'CalendarCheck',
+                id: 'pg_chooser_de_afspraak'
+            },
+            {
+                name: 'De zevende dag',
+                icon: 'Donut',
+                id: 'pg_chooser_de_zevende_dag'
+            },
+            {
+                name: 'Journaal',
+                icon: 'Newspaper',
+                id: 'pg_chooser_journaal',
+                action: 'do_journaal'
+            }
+        ],
+        votes: 2
     }
 }
