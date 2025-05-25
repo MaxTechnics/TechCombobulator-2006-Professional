@@ -112,12 +112,72 @@ const rundownActions: { [action_id: string]: RundownAction } = {
             },
             {
                 type: 'wait',
-                id: '4000'
+                id: '5000'
             },
             {
                 type: 'jingle_trigger',
                 id: 'jn_2013_j19_apotheose'
             },
+        ]
+    },
+    'do_d7d': {
+        name: 'Run De zevende dag',
+        description: 'Run the 7dag program rundown',
+        actions: [
+            {
+                type: 'jingle_trigger',
+                id: 'd7_2024_hl'
+            },
+            {
+                type: 'wait',
+                id: '5000'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'd7_2024_topic'
+            },
+            {
+                type: 'wait',
+                id: '5000'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'd7_2024_topic'
+            },
+            {
+                type: 'wait',
+                id: '5000'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'd7_2024_topic'
+            },
+            {
+                type: 'wait',
+                id: '10000'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'd7_2024_intro'
+            }
+        ]
+    },
+    'do_daf': {
+        name: 'De afspraak run',
+        description: 'Run the De afspraak program rundown',
+        actions: [
+            {
+                type: 'jingle_trigger',
+                id: 'df_2024_opener'
+            },
+            {
+                type: 'wait',
+                id: '15000'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'df_2024_intro'
+            }
         ]
     }
 }
