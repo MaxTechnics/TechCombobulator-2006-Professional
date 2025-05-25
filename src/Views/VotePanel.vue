@@ -80,7 +80,9 @@ const handleVoteStart = async (act: VoteMessage) => {
 
 const handleVoteEnd = () => {
     voting_active.value = false;
-    // sendVoteEnd(props.realtimeChannel);
+    sendVoteEnd(props.realtimeChannel);
+
+    if (computedVoteBracket.value[0].action && computedVoteBracket.value[0].tally !== 0) executeRundownActions(props.realtimeChannel, computedVoteBracket.value[0].action);
 }
 
 // props.realtimeChannel.on('broadcast', { event: 'vote_trigger' }, async ({ payload }: { payload: { action_id: VoteMessage } }) => {
