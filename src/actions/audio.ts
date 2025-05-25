@@ -4,6 +4,34 @@ interface CombobulatorAction {
 }
 
 export const jingleActions: { [group: string]: { [action_id: string]: CombobulatorAction } } = {
+    'Journaal 2013 MXM': {
+        // clock -> uitsmijter
+        'jn_mxm_counter': {
+            name: 'Counter',
+            id: 'jn_mxm_counter'
+        },
+        'jn_mxm_start': {
+            name: 'Start',
+            id: 'jn_mxm_start'
+        },
+
+        'jn_mxm_hl1': {
+            name: 'Headline 1',
+            id: 'jn_mxm_hl1'
+        },
+        'jn_2013_j19_hl234': {
+            name: 'Headline 234',
+            id: 'jn_2013_j19_hl234'
+        },
+        'jn_2013_j19_hl_switch': {
+            name: 'Headline switch',
+            id: 'jn_2013_j19_hl_switch'
+        },
+        'jn_2013_j19_apotheose': {
+            name: 'Intro',
+            id: 'jn_2013_j19_apotheose'
+        }
+    },
     'Journaal 2013 J13': {
         // goto sport J_OVER_NAAR_SPORT
         // back to news J_IDENT_LOGO
