@@ -31,10 +31,43 @@
 
                 <section class="tabs">
                     <menu role="tablist" aria-label="Sample Tabs">
+                        <button @click="activeTab = 'rundown'" role="tab" :aria-selected="activeTab === 'rundown'" aria-controls="tab-A">Rundown</button>
                         <button @click="activeTab = 'actions'" role="tab" :aria-selected="activeTab === 'actions'" aria-controls="tab-A">Actions</button>
                         <button @click="activeTab = 'debug'" role="tab" :aria-selected="activeTab === 'debug'" aria-controls="tab-B">Debug</button>
                         <button @click="activeTab = 'clippy'" role="tab" :aria-selected="activeTab === 'clippy'" aria-controls="tab-C">Clippy</button>
                     </menu>
+
+                    <article v-if="activeTab === 'rundown'" role="tabpanel" id="tab-A">
+                        <div class="actions_view">
+                            <p>hi</p>
+                            <!-- <fieldset v-for="(group, groupName) in jingleActions" :key="groupName">
+                                <legend>{{ groupName }}</legend>
+                                <button @click="sendjingle(action.id)" v-for="action in group" :key="action.id">{{ action.name }}</button>
+                            </fieldset> -->
+                            <fieldset>
+                                <legend>Backstage demo</legend>
+                                <button @click="clip?.speak('Debugger? I hardly know her!', false);">Start counter</button>
+                                <button>Start jnl</button>
+                                <button>Headline 1</button>
+                                <button>Headline 2</button>
+                                <button>Headline 3</button>
+                                <button>Headline 4</button>
+                                <button>Start voting</button>
+                                <button>Finish voting</button>
+                                <button>Cancel voting</button>
+                                <button>Start pres</button>
+                                <button>Item 1</button>
+                                <button>Item 2</button>
+                                <button>Item 3</button>
+                                <button>Item 4</button>
+                                <button>Weer</button>
+                                <button>Groet</button>
+                                <button>Outro</button>
+                            </fieldset>
+
+                            <VotePanel :realtimeChannel="bsChannel" />
+                        </div>
+                    </article>
 
                     <article v-if="activeTab === 'actions'" role="tabpanel" id="tab-A">
                         <div class="actions_view">
@@ -47,14 +80,12 @@
                     </article>
 
                     <article v-if="activeTab === 'debug'" role="tabpanel" id="tab-B">
-                        <!-- <div class="button_container"> -->
                         <section class="field-row" style="justify-content: flex-end">
                             <button @click="clip?.play('Wave'); clip?.speak('This does not work :c')">Quit</button>
                             <button @click=" clip?.play('Congratulate')">Initialize Jingles</button>
                             <button @click="clip?.play('Thinking')" class="default">Load all</button>
                             <StartBtn @click=" clip?.play('Wave'); clip?.speak('This does not work :c')">Start</StartBtn>
                         </section>
-                        <!-- </div> -->
                     </article>
 
                     <article role="tabpanel" hidden id="tab-C">
@@ -76,11 +107,7 @@
 </template>
 
 <script setup lang="ts">
-// import { actions } from './audioutils/actions';
-import { Howl } from 'howler';
 import { onMounted, reactive, ref, onErrorCaptured } from 'vue';
-
-// import { JingleType, jinglesByProgram } from './audioutils/jingles';
 import clippy, { Agent } from './clippy/index';
 import LoadingView from './Views/LoadingView.vue';
 import Error from './Views/Error.vue';
@@ -90,24 +117,21 @@ import { createClient } from '@supabase/supabase-js';
 import RealtimeLatency from './components/RealtimeLatency.vue';
 import { jingleActions } from './actions/audio';
 import spin from './images/undertale-dog.gif';
+import VotePanel from './Views/VotePanel.vue';
 
 const hasLoaded = ref(false);
-const activeTab = ref<'actions' | 'oldjingles' | 'debug' | 'clippy'>('debug');
+const activeTab = ref<'rundown' | 'actions' | 'oldjingles' | 'debug' | 'clippy'>('debug');
 
 const env = import.meta.env
 const supabase = createClient(env.VITE_APP_SUPABASE_URL, env.VITE_APP_SUPABASE_KEY)
 
 const bsChannel = supabase.channel('backstage', {
-    config: {
-        broadcast: { ack: true }
-    }
+    config: { broadcast: { ack: true } }
 }).subscribe();
 
-const dbg_fields = reactive({
-    playJingleId: '',
-    playTapijtjeId: '',
-    playEffectId: ''
-})
+bsChannel.on('broadcast', { event: 'acknowledge' }, () => {
+    console.log('Event acknowledged');
+});
 
 const sendjingle = async (id: string) => {
     console.log('Dojingle', id)
@@ -117,9 +141,6 @@ const sendjingle = async (id: string) => {
         payload: { action_id: id }
     })
 }
-
-// Debug view  
-const selectedItem = ref(null);
 
 // Status bar
 const updateClock = () => {
