@@ -15,6 +15,8 @@
         <li>Invalid votes: {{ invalid_tally }}</li>
         </details>
         </li>
+
+        <li>Test thingie: {{ computedVoteBracket.map(i => `${i.name} (${i.id})`) }}</li>
     </ul>
 </template>
 
@@ -23,31 +25,11 @@ import { type RealtimeChannel } from '@supabase/supabase-js';
 import { sendVoteAction, sendVoteEnd } from '../lib/vote';
 import { type VoteMessage, voteActions, type VoteChoice } from '../actions/vote';
 import { ref } from 'vue';
+import { computed } from 'vue';
+import { executeRundownActions } from '../lib/rundownmgr';
 
 const voting_active = ref(false);
-const active_vote = ref<VoteMessage | null>({
-    id: 'test_vote',
-    title: 'Your vote counts xD',
-    choice: [
-        {
-            name: 'Choice 1',
-            icon: 'Check',
-            id: 'choice_1',
-            action: ''
-        },
-        {
-            name: 'Choice 2',
-            icon: 'X',
-            id: 'choice_2'
-        },
-        {
-            name: 'Choice 3',
-            icon: 'Heart',
-            id: 'choice_3'
-        }
-    ],
-    votes: -1
-});
+const active_vote = ref<VoteMessage | null>(null);
 const vote_tally = ref<{
     [vote_option: string]: {
         name: string;
@@ -102,12 +84,5 @@ props.realtimeChannel.on('broadcast', { event: 'vote_submission' }, async ({ pay
         console.warn('Invalid vote');
         invalid_tally.value++;
     }
-
-});
-
-props.realtimeChannel.on('broadcast', { event: 'vote_end' }, async () => {
-    console.log('Vote end heard, disabling tally');
-
-    voting_active.value = false;
 });
 </script>
