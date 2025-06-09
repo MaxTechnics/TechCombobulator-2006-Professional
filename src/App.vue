@@ -26,7 +26,7 @@
             </div>
 
             <div class="window-body windowcontent">
-                <p>This shit is like so ass<br />Elk zunnen dah<br />ik ben herrit callewaert uit bavikhove deelhemeente van oarelbeke.</p>
+                <p>Notice<br>If you notice this notice you will notice that this notice is not worth noticing.</p>
                 <img style="position: absolute; top: 30px; right: 5px; height: 75px;" :src="spin" />
 
                 <section class="tabs">
