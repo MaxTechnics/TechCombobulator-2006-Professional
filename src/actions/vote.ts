@@ -107,7 +107,7 @@ export const voteActions: { [action_id: string]: VoteMessage } = {
                 rundownitems: [
                     'bp_fullrun_atc_ident',
                     'bp_fullrun_atc_start',
-                    'bp_fullrun_ree_repo'
+                    'bp_fullrun_atc_repo'
                 ]
             },
             {
