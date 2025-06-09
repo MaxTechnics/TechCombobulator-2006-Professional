@@ -33,42 +33,51 @@
 
                 <section class="tabs">
                     <menu role="tablist" aria-label="Sample Tabs">
-                        <button @click="activeTab = 'rundown'" role="tab" :aria-selected="activeTab === 'rundown'" aria-controls="tab-A">Rundown</button>
+                        <button @click="activeTab = 'bachelor'" role="tab" :aria-selected="activeTab === 'bachelor'" aria-controls="tab-bp">Bachelor</button>
+                        <button @click="activeTab = 'rundown'" role="tab" :aria-selected="activeTab === 'rundown'" aria-controls="tab-A">Rundown (test)</button>
                         <button @click="activeTab = 'actions'" role="tab" :aria-selected="activeTab === 'actions'" aria-controls="tab-A">Actions</button>
                         <button @click="activeTab = 'debug'" role="tab" :aria-selected="activeTab === 'debug'" aria-controls="tab-B">Debug</button>
                         <button @click="activeTab = 'clippy'" role="tab" :aria-selected="activeTab === 'clippy'" aria-controls="tab-C">Clippy</button>
                     </menu>
 
+                    <article v-if="activeTab === 'bachelor'" role="tabpanel" id="tab-bp">
+                        <div class="">
+                            <p>Rundown for Maxim's Journaal</p>
+                            <fieldset>
+                                <legend>Backstage demo</legend>
+                                <section class="bp">
+                                    <ul>
+                                        <li v-for="item in getDynamicRundown()" :key="item.id" :class="{ active: rundown.active === item.id }" v-memo="[voteStore.computedVoteBracket, rundown.active]">
+                                            <span>
+                                                {{ item.name }} <br />
+                                                {{ item.description }}<br />
+                                            </span>
+                                            <button @click="rundown.active = item.id; executeRundownActions(bsChannel, item.id)" style="margin-left: auto">Run</button>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </fieldset>
+
+                            <div class="actions_view">
+                                <VotePanel :realtimeChannel="bsChannel" />
+
+                                <fieldset>
+                                    <legend>Rundown actions in case something goes amiss</legend>
+                                    <button @click="executeRundownActions(bsChannel, id as string)" v-for="(action, id) in rundownActions" :key="id">{{ action.name + id }}</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </article>
+
                     <article v-if="activeTab === 'rundown'" role="tabpanel" id="tab-A">
                         <div class="actions_view">
                             <p>hi</p>
-                            <!-- <fieldset v-for="(group, groupName) in jingleActions" :key="groupName">
-                                <legend>{{ groupName }}</legend>
-                                <button @click="sendjingle(action.id)" v-for="action in group" :key="action.id">{{ action.name }}</button>
-                            </fieldset> -->
-                            <fieldset>
-                                <legend>Backstage demo</legend>
-                                <button @click="clip?.speak('Debugger? I hardly know her!', false);">Start counter</button>
-                                <button>Start jnl</button>
-                                <button>Headline 1</button>
-                                <button>Headline 2</button>
-                                <button>Headline 3</button>
-                                <button>Headline 4</button>
-                                <button>Start voting</button>
-                                <button>Finish voting</button>
-                                <button>Cancel voting</button>
-                                <button>Start pres</button>
-                                <button>Item 1</button>
-                                <button>Item 2</button>
-                                <button>Item 3</button>
-                                <button>Item 4</button>
-                                <button>Weer</button>
-                                <button>Groet</button>
-                                <button>Outro</button>
-                            </fieldset>
+                            <VotePanel :realtimeChannel="bsChannel" debug />
 
-                            <VotePanel :realtimeChannel="bsChannel" />
-                            <div role="tooltip">A balloon is better known as tooltip in web development.</div>
+                            <fieldset>
+                                <legend>Rundown actions</legend>
+                                <button @click="executeRundownActions(bsChannel, id as string)" v-for="(action, id) in rundownActions" :key="id">{{ action.name + id }}</button>
+                            </fieldset>
                         </div>
                     </article>
 
@@ -115,6 +124,7 @@ import { onMounted, reactive, ref, onErrorCaptured } from 'vue';
 import clippy, { Agent } from './clippy/index';
 import LoadingView from './Views/LoadingView.vue';
 import { executeRundownActions } from './lib/rundownmgr';
+import { rundownActions, getBachelorRundown, type RundownAction, getDynamicRundown } from './actions/rundown';
 import Error from './Views/Error.vue';
 import StartBtn from './components/StartBtn.vue'
 // import clippymap from './clippy/agents/Clippy/map.png';
@@ -123,10 +133,22 @@ import RealtimeLatency from './components/RealtimeLatency.vue';
 import { jingleActions } from './actions/audio';
 import spin from './images/undertale-dog.gif';
 import VotePanel from './Views/VotePanel.vue';
+import { useVoteStore } from './stores/vote';
 import ClockThing from './components/ClockThing.vue';
 
+const voteStore = useVoteStore();
+
 const hasLoaded = ref(false);
-const activeTab = ref<'rundown' | 'actions' | 'oldjingles' | 'debug' | 'clippy'>('debug');
+const activeTab = ref<'bachelor' | 'rundown' | 'actions' | 'oldjingles' | 'debug' | 'clippy'>('bachelor');
+const rundown = reactive<{
+    active: string;
+    // items: RundownAction[]
+}>({
+    active: '',
+    // items: []
+});
+
+// rundown.items = getBachelorRundown();
 
 const env = import.meta.env
 const supabase = createClient(env.VITE_APP_SUPABASE_URL, env.VITE_APP_SUPABASE_KEY)
@@ -149,13 +171,6 @@ const sendjingle = async (id: string) => {
 }
 
 // Status bar
-const updateClock = () => {
-    const date = new Date();
-    const formatted = Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(date);
-    time.value = formatted;
-};
-const time = ref('HUUH???');
-
 const clip = ref<Agent | undefined>();
 
 const dothing = () => {
@@ -163,8 +178,6 @@ const dothing = () => {
 }
 
 onMounted(() => {
-    setInterval(updateClock, 100);
-
     console.log(window.innerWidth)
 
     clippy.load({
@@ -228,6 +241,48 @@ h1 {
     color: #fff;
     text-shadow: -10px 10px 0px #00e6e6, -20px 20px 0px #01cccc, -30px 30px 0px #00bdbd;
 }
+
+.bp ul {
+  margin: 0 auto;
+  padding: 0;
+  max-height: 390px;
+  overflow-y: auto;
+  padding: 5px 5px 0 5px;
+  border-left: none;
+  border-right: none;
+}
+
+.bp li {
+  list-style: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  background-image: 
+    linear-gradient(
+      90deg,
+      #FFD32E 10px,
+      #EEE 10px,
+      #EEE 11px,
+      transparent 11px);
+  padding: 10px 15px 10px 25px;
+  border: 1px solid #CCC;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+  margin-bottom: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 3px;
+
+  display: flex;
+
+   &.active {
+        background-image:  linear-gradient(
+      90deg,
+      #ff0000 10px,
+      #EEE 10px,
+      #EEE 11px,
+      transparent 11px);;
+    }
+}
+
 
 .actions_view {
     fieldset {
