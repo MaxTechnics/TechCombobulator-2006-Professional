@@ -11,7 +11,9 @@
             <div class="status-bar status" style="align-self: flex-end;">
                 <p class="status-bar-field">System ready</p>
                 <p class="status-bar-field">TBAow</p>
-                <p class="status-bar-field">{{ time }}</p>
+                <p class="status-bar-field">
+                    <ClockThing />
+                </p>
             </div>
         </div>
 
@@ -100,7 +102,9 @@
                 <p class="status-bar-field">
                     <RealtimeLatency :supa_client="supabase" />
                 </p>
-                <p class="status-bar-field">{{ time }}</p>
+                <p class="status-bar-field">
+                    <ClockThing />
+                </p>
             </div>
         </div>
     </main>
@@ -119,6 +123,7 @@ import RealtimeLatency from './components/RealtimeLatency.vue';
 import { jingleActions } from './actions/audio';
 import spin from './images/undertale-dog.gif';
 import VotePanel from './Views/VotePanel.vue';
+import ClockThing from './components/ClockThing.vue';
 
 const hasLoaded = ref(false);
 const activeTab = ref<'rundown' | 'actions' | 'oldjingles' | 'debug' | 'clippy'>('debug');
