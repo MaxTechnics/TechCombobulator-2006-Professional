@@ -784,11 +784,12 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         ]
     },
 
-    bp_outro: {
+
+    'bp_outro_keulen': {
         type: 'static',
-        id: 'bp_outro',
-        name: 'BP Outro',
-        description: 'End clip & credits',
+        id: 'bp_outro_keulen',
+        name: 'BP Outro Keulen',
+        description: '',
         actions: [
             {
                 type: 'jingle_trigger',
@@ -798,11 +799,155 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 type: 'wait',
                 id: '1500'
             },
-            // do end clip
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 2,
+                clip: 'Outro/OutroKeulen_v1',
+                transition: true
+            },
             {
                 type: 'wait',
-                id: '10000'
+                id: '5000'
             },
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 4,
+                clip: 'outro_v2'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'jn_2013_copyright'
+            }
+        ]
+    },
+    'bp_outro_startexamen': {
+        type: 'static',
+        id: 'bp_outro_startexamen',
+        name: 'BP Outro Start Examen',
+        description: '',
+        actions: [
+            {
+                type: 'jingle_trigger',
+                id: 'jn_2013_eind'
+            },
+            {
+                type: 'wait',
+                id: '1500'
+            },
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 2,
+                clip: 'Outro/OutroStartexamen_v1',
+                transition: true
+            },
+            {
+                type: 'wait',
+                id: '16500'
+            },
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 4,
+                clip: 'outro_v2'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'jn_2013_copyright'
+            }
+        ]
+    },
+    'bp_outro_atc': {
+        type: 'static',
+        id: 'bp_outro_atc',
+        name: 'BP Outro ATC',
+        description: '',
+        actions: [
+            {
+                type: 'jingle_trigger',
+                id: 'jn_2013_eind'
+            },
+            {
+                type: 'wait',
+                id: '1500'
+            },
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 2,
+                clip: 'Outro/OutroATC_v1',
+                transition: true
+            },
+            {
+                type: 'wait',
+                id: '6200'
+            },
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 4,
+                clip: 'outro_v2'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'jn_2013_copyright'
+            }
+        ]
+    },
+    'bp_outro_ree': {
+        type: 'static',
+        id: 'bp_outro_ree',
+        name: 'BP Outro Ree',
+        description: '',
+        actions: [
+            {
+                type: 'jingle_trigger',
+                id: 'jn_2013_eind'
+            },
+            {
+                type: 'wait',
+                id: '1500'
+            },
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 2,
+                clip: 'Outro/OutroRee_v1',
+                transition: true
+            },
+            {
+                type: 'wait',
+                id: '9200'
+            },
+            {
+                type: 'blinken_video',
+                cmd: 'play',
+                channel: 1,
+                layer: 4,
+                clip: 'outro_v2'
+            },
+            {
+                type: 'jingle_trigger',
+                id: 'jn_2013_copyright'
+            }
+        ]
+    },
+
+    bp_outro: {
+        type: 'static',
+        id: 'bp_outro',
+        name: 'BP Outro',
+        description: 'Outro without end clips',
+        actions: [
             {
                 type: 'blinken_video',
                 cmd: 'play',
@@ -1032,7 +1177,11 @@ export const bachelorRundown = [
     'bp_weather',
     'bp_studio',
 
-    'bp_outro' // outro clips TODO
+    'bp_outro_keulen',
+    'bp_outro_startexamen',
+    'bp_outro_atc',
+    'bp_outro_ree',
+    'bp_outro' // just in case
 ]
 
 
