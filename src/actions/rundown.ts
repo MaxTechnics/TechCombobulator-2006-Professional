@@ -55,6 +55,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         description: 'Prepares all systems for show start',
         actions: [
             {
+                type: 'blinken_light',
+                id: 'l_effect_off'
+            },
+            {
                 type: 'blinken_video',
                 cmd: 'clear',
                 channel: 1,
@@ -110,7 +114,7 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
             //     layer: 2,
             //     clip: 'studiobg' // for intro transiitons
             // }
-            // set light to correct
+            // TODO set light to correct
         ]
     },
     'bp_clock': {
@@ -179,7 +183,6 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 layer: 5,
                 clip: 'kies_qr_v2'
             }
-            // Do light
         ]
     },
     'bp_hl1': {
@@ -188,6 +191,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'BP Headline 1',
         description: 'Headline 1 Donderen in keulen || DOORLEZER',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_headline_dim'
+            },
             {
                 type: 'jingle_trigger',
                 id: 'jn_mxm_hl1'
@@ -214,9 +221,7 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
             {
                 type: 'jingle_trigger',
                 id: 'jn_2013_j19_hl_switch'
-            },
-            // hl video
-            // maybe light?? probably not
+            }
         ]
     },
     'bp_hl2': {
@@ -396,8 +401,20 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 layer: 2
             },
             {
+                type: 'blinken_light',
+                id: 'l_intro'
+            },
+            {
                 type: 'jingle_trigger',
                 id: 'jn_2013_j19_apotheose'
+            },
+            {
+                type: 'wait',
+                id: '1000'
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_effect_red',
             }
         ]
     },
@@ -408,6 +425,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'BP Studio',
         description: 'Back to studio',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'play',
@@ -437,6 +458,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'Ident Keulen',
         description: 'Run Keulen newsitem ident',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'clear',
@@ -470,6 +495,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         description: 'Run Keulen newsitem',
         actions: [
             {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
+            {
                 type: 'blinken_video',
                 cmd: 'clear',
                 channel: 1,
@@ -490,6 +519,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'Fullrun Keulen Repo',
         description: 'Start repo keulen',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_headline_dim'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'play',
@@ -517,6 +550,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'Ident Start Examen',
         description: 'Start Examen ident',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'clear',
@@ -549,6 +586,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         description: 'Run Start Examen newsitem',
         actions: [
             {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
+            {
                 type: 'blinken_video',
                 cmd: 'clear',
                 channel: 1,
@@ -569,6 +610,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         description: 'Start repo starttoetsen',
         actions: [
             {
+                type: 'blinken_light',
+                id: 'l_headline_dim'
+            },
+            {
                 type: 'blinken_video',
                 cmd: 'play',
                 channel: 1,
@@ -584,6 +629,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'Ident ATC',
         description: 'Run ATC newsitem ident',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'clear',
@@ -616,6 +665,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         description: 'Run ATC newsitem',
         actions: [
             {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
+            {
                 type: 'blinken_video',
                 cmd: 'clear',
                 channel: 1,
@@ -636,6 +689,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         description: 'Start repo atc',
         actions: [
             {
+                type: 'blinken_light',
+                id: 'l_headline_dim'
+            },
+            {
                 type: 'blinken_video',
                 cmd: 'play',
                 channel: 1,
@@ -651,6 +708,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'Ident Ree',
         description: 'Run Ree ident',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'clear',
@@ -683,6 +744,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         description: 'Run Ree newsitem',
         actions: [
             {
+                type: 'blinken_light',
+                id: 'l_main_studio_white'
+            },
+            {
                 type: 'blinken_video',
                 cmd: 'clear',
                 channel: 1,
@@ -702,6 +767,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'Fullrun Ree Repo',
         description: 'Start repo ree',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_headline_dim'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'play',
@@ -796,6 +865,14 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 id: 'jn_2013_eind'
             },
             {
+                type: 'blinken_light',
+                id: 'l_effect_white',
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_main_off'
+            },
+            {
                 type: 'wait',
                 id: '1500'
             },
@@ -806,6 +883,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 layer: 2,
                 clip: 'Outro/OutroKeulen_v1',
                 transition: true
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_effect_off'
             },
             {
                 type: 'wait',
@@ -835,6 +916,14 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 id: 'jn_2013_eind'
             },
             {
+                type: 'blinken_light',
+                id: 'l_effect_white',
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_main_off'
+            },
+            {
                 type: 'wait',
                 id: '1500'
             },
@@ -845,6 +934,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 layer: 2,
                 clip: 'Outro/OutroStartexamen_v1',
                 transition: true
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_effect_off'
             },
             {
                 type: 'wait',
@@ -874,6 +967,14 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 id: 'jn_2013_eind'
             },
             {
+                type: 'blinken_light',
+                id: 'l_effect_white',
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_main_off'
+            },
+            {
                 type: 'wait',
                 id: '1500'
             },
@@ -884,6 +985,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 layer: 2,
                 clip: 'Outro/OutroATC_v1',
                 transition: true
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_effect_off'
             },
             {
                 type: 'wait',
@@ -913,6 +1018,14 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 id: 'jn_2013_eind'
             },
             {
+                type: 'blinken_light',
+                id: 'l_effect_white',
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_main_off'
+            },
+            {
                 type: 'wait',
                 id: '1500'
             },
@@ -923,6 +1036,10 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
                 layer: 2,
                 clip: 'Outro/OutroRee_v1',
                 transition: true
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_effect_off'
             },
             {
                 type: 'wait',
@@ -948,6 +1065,14 @@ export const rundownActions: { [action_id: string]: RundownAction } = {
         name: 'BP Outro',
         description: 'Outro without end clips',
         actions: [
+            {
+                type: 'blinken_light',
+                id: 'l_effect_white',
+            },
+            {
+                type: 'blinken_light',
+                id: 'l_main_off'
+            },
             {
                 type: 'blinken_video',
                 cmd: 'play',
